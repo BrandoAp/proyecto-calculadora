@@ -17,7 +17,7 @@ namespace proyecto_calculadora
         public Form1()
         {
             InitializeComponent();
-            contentListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+            
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -36,102 +36,119 @@ namespace proyecto_calculadora
 
         private void clearButton_Click(object sender, EventArgs e)
         {
-            contentListView.Items.Clear();
+            expresionView.Clear();
+            resutlView.Clear();
         }
 
         private void ceroButton_Click(object sender, EventArgs e)
         {
-            contentListView.Items.Add("0");
+            expresionView.Items.Add("0");
         }
 
         private void oneButton_Click(object sender, EventArgs e)
         {
-            contentListView.Items.Add("1");
+            expresionView.Items.Add("1");
         }
 
         private void twoButton_Click(object sender, EventArgs e)
         {
-            contentListView.Items.Add("2");
+            expresionView.Items.Add("2");
         }
 
         private void treeButton_Click(object sender, EventArgs e)
         {
-            contentListView.Items.Add("3");
+            expresionView.Items.Add("3");
         }
 
         private void fourButton_Click(object sender, EventArgs e)
         {
-            contentListView.Items.Add("4");
+            expresionView.Items.Add("4");
         }
 
         private void fiveButton_Click(object sender, EventArgs e)
         {
-            contentListView.Items.Add("5");
+            expresionView.Items.Add("5");
         }
 
         private void sixButton_Click(object sender, EventArgs e)
         {
-            contentListView.Items.Add("6");
+            expresionView.Items.Add("6");
         }
 
         private void sevenButton_Click(object sender, EventArgs e)
         {
-            contentListView.Items.Add("7");
+            expresionView.Items.Add("7");
         }
 
         private void eightButton_Click(object sender, EventArgs e)
         {
-            contentListView.Items.Add("8");
+            expresionView.Items.Add("8");
         }
 
         private void nineButton_Click(object sender, EventArgs e)
         {
-            contentListView.Items.Add("9");
+            expresionView.Items.Add("9");
         }
 
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        private void sumButton_Click(object sender, EventArgs e)
         {
-            // Aqui por el momento no habra ninguna funcionalidad
-        }
-
-        private void pointButton_Click(object sender, EventArgs e)
-        {
-            contentListView.Items.Add(".");
-        }
-
-        private void divisionButton_Click(object sender, EventArgs e)
-        {
-            contentListView.Items.Add("÷");
-        }
-
-        private void multiButton_Click(object sender, EventArgs e)
-        {
-            contentListView.Items.Add("x");
+            expresionView.Items.Add("+");
         }
 
         private void minButton_Click(object sender, EventArgs e)
         {
-            contentListView.Items.Add("-");
+            expresionView.Items.Add("-");
         }
 
-        private void sumaButton_Click(object sender, EventArgs e)
+        private void plusButton_Click(object sender, EventArgs e)
         {
-            contentListView.Items.Add("+");
+            expresionView.Items.Add("x");
         }
 
         private void exponentButton_Click(object sender, EventArgs e)
         {
-            contentListView.Items.Add("^");
+            expresionView.Items.Add("^");
+        }
+
+        private void divButton_Click(object sender, EventArgs e)
+        {
+            expresionView.Items.Add("÷");
         }
 
         private void sqrtButton_Click(object sender, EventArgs e)
         {
-            contentListView.Items.Add("√");
+            expresionView.Items.Add("√");
         }
 
-        private void percentageButton_Click(object sender, EventArgs e)
+        private void viewHistorial_Click(object sender, EventArgs e)
         {
-            contentListView.Items.Add("%");
+            CargarHitorial();
+        }
+
+        public void CargarHitorial() //Hace falta provar este metodo
+        {
+            string sql = "Select expresion, resultado, fecha_operacion from Historial_Calculos;";
+            try
+            {
+                SqlConnection connection = new SqlConnection(connectionString);
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    connection.Open();
+                    using(SqlDataReader reader = command.ExecuteReader())
+                    {
+                        listViewHistorial.Items.Clear();
+                        while (reader.Read())
+                        {
+                            listViewHistorial.Items.Add(reader.GetString(0), reader.GetString(1), reader.GetString(2));
+                        }
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("Error al cargar el historial de operaciones ",
+                    ex.Message);
+            }
         }
     }
 }
