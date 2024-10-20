@@ -125,9 +125,9 @@ namespace proyecto_calculadora
             CargarHitorial();
         }
 
-        public void CargarHitorial() //Hace falta provar este metodo
+        public void CargarHitorial() //recupera la expresion pero no el resultado
         {
-            string sql = "Select expresion, resultado, fecha_operacion from Historial_Calculos;";
+            string sql = "Select expresion, resultado from Historial_Calculos;";
             try
             {
                 SqlConnection connection = new SqlConnection(connectionString);
@@ -139,8 +139,15 @@ namespace proyecto_calculadora
                         listViewHistorial.Items.Clear();
                         while (reader.Read())
                         {
-                            listViewHistorial.Items.Add(reader.GetString(0), reader.GetString(1), reader.GetString(2));
+                            string expresion = reader.GetString(0);
+                            decimal resultado = reader.GetDecimal(1);
+
+                            ListViewItem item = new ListViewItem(expresion);
+                            item.SubItems.Add(resultado.ToString());
+
+                            listViewHistorial.Items.Add(item);
                         }
+                        reader.Close();
                     }
                 }
             }
