@@ -48,9 +48,9 @@
             this.equalsButton = new System.Windows.Forms.Button();
             this.sqrtButton = new System.Windows.Forms.Button();
             this.viewHistorial = new System.Windows.Forms.Button();
-            this.listViewHistorial = new System.Windows.Forms.ListView();
             this.expressionTxt = new System.Windows.Forms.TextBox();
             this.resultTxt = new System.Windows.Forms.TextBox();
+            this.listViewHistorial = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // oneButton
@@ -287,15 +287,6 @@
             this.viewHistorial.UseVisualStyleBackColor = false;
             this.viewHistorial.Click += new System.EventHandler(this.viewHistorial_Click);
             // 
-            // listViewHistorial
-            // 
-            this.listViewHistorial.HideSelection = false;
-            this.listViewHistorial.Location = new System.Drawing.Point(454, 69);
-            this.listViewHistorial.Name = "listViewHistorial";
-            this.listViewHistorial.Size = new System.Drawing.Size(372, 266);
-            this.listViewHistorial.TabIndex = 23;
-            this.listViewHistorial.UseCompatibleStateImageBehavior = false;
-            // 
             // expressionTxt
             // 
             this.expressionTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -320,14 +311,22 @@
             this.resultTxt.TabIndex = 25;
             this.resultTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
+            // listViewHistorial
+            // 
+            this.listViewHistorial.FormattingEnabled = true;
+            this.listViewHistorial.Location = new System.Drawing.Point(454, 69);
+            this.listViewHistorial.Name = "listViewHistorial";
+            this.listViewHistorial.Size = new System.Drawing.Size(372, 264);
+            this.listViewHistorial.TabIndex = 26;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(838, 346);
+            this.Controls.Add(this.listViewHistorial);
             this.Controls.Add(this.resultTxt);
             this.Controls.Add(this.expressionTxt);
-            this.Controls.Add(this.listViewHistorial);
             this.Controls.Add(this.viewHistorial);
             this.Controls.Add(this.sqrtButton);
             this.Controls.Add(this.equalsButton);
@@ -376,9 +375,9 @@
         private System.Windows.Forms.Button equalsButton;
         private System.Windows.Forms.Button sqrtButton;
         private System.Windows.Forms.Button viewHistorial;
-        private System.Windows.Forms.ListView listViewHistorial;
         private System.Windows.Forms.TextBox expressionTxt;
         private System.Windows.Forms.TextBox resultTxt;
+        private System.Windows.Forms.ListBox listViewHistorial;
     }
 }
 
