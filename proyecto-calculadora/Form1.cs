@@ -13,11 +13,14 @@ namespace proyecto_calculadora
 {
     public partial class Form1 : Form
     {
+        double num1 = 0, num2 = 0;
+        char Op;
         string connectionString = @"Server=.\sqlexpress;Database=calculadora;Trusted_Connection=true;";
+
         public Form1()
         {
             InitializeComponent();
-            
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -34,90 +37,77 @@ namespace proyecto_calculadora
 
         }
 
+        private void addNum (object sender, EventArgs e)
+        {
+            var btn = ((Button)sender);
+
+            if
+                (expressionTxt.Text == "0")
+                expressionTxt.Text = "";
+
+            expressionTxt.Text += btn.Text;
+        }
+
+        private void clickOp(object sender, EventArgs e)
+        {
+            var btn = ((Button)sender);
+            num1 = Convert.ToDouble(expressionTxt.Text);
+            Op = Convert.ToChar(btn.Tag);
+
+            if (Op == '²')
+            {
+                num1 = Math.Pow(num1, 2);
+                resultTxt.Text = num1.ToString();
+                expressionTxt.Text = "0";
+            }
+            else if (Op == '√')
+            {
+                num1 = Math.Sqrt(num1);
+                resultTxt.Text = num1.ToString();
+                expressionTxt.Text = "0";
+            }
+            else
+            {
+                expressionTxt.Text = "0";
+            }
+        }
         private void clearButton_Click(object sender, EventArgs e)
         {
-            expresionView.Clear();
-            resutlView.Clear();
+            expressionTxt.Clear();
+            resultTxt.Clear();
         }
 
-        private void ceroButton_Click(object sender, EventArgs e)
+        private void equalsButton_Click(object sender, EventArgs e)
         {
-            expresionView.Items.Add("0");
-        }
+            num2 = Convert.ToInt32(expressionTxt.Text);
+            if (Op == '+')
+            {
+                resultTxt.Text = (num1 + num2).ToString();
+                num1 = Convert.ToDouble(resultTxt.Text);
 
-        private void oneButton_Click(object sender, EventArgs e)
-        {
-            expresionView.Items.Add("1");
-        }
+                expressionTxt.Text = "0";
+            }
+            else if (Op == '-')
+            {
+                resultTxt.Text = (num1 - num2).ToString();
+                num1 = Convert.ToDouble(resultTxt.Text);
 
-        private void twoButton_Click(object sender, EventArgs e)
-        {
-            expresionView.Items.Add("2");
-        }
+                expressionTxt.Text = "0";
+            }
+            else if (Op == 'x')
+            {
+                resultTxt.Text = (num1 * num2).ToString();
+                num1 = Convert.ToDouble(resultTxt.Text);
 
-        private void treeButton_Click(object sender, EventArgs e)
-        {
-            expresionView.Items.Add("3");
-        }
+                expressionTxt.Text = "0";
+            }
+            else if (Op == '/')
+            {
+                resultTxt.Text = (num1 / num2).ToString();
+                num1 = Convert.ToDouble(resultTxt.Text);
 
-        private void fourButton_Click(object sender, EventArgs e)
-        {
-            expresionView.Items.Add("4");
-        }
-
-        private void fiveButton_Click(object sender, EventArgs e)
-        {
-            expresionView.Items.Add("5");
-        }
-
-        private void sixButton_Click(object sender, EventArgs e)
-        {
-            expresionView.Items.Add("6");
-        }
-
-        private void sevenButton_Click(object sender, EventArgs e)
-        {
-            expresionView.Items.Add("7");
-        }
-
-        private void eightButton_Click(object sender, EventArgs e)
-        {
-            expresionView.Items.Add("8");
-        }
-
-        private void nineButton_Click(object sender, EventArgs e)
-        {
-            expresionView.Items.Add("9");
-        }
-
-        private void sumButton_Click(object sender, EventArgs e)
-        {
-            expresionView.Items.Add("+");
-        }
-
-        private void minButton_Click(object sender, EventArgs e)
-        {
-            expresionView.Items.Add("-");
-        }
-
-        private void plusButton_Click(object sender, EventArgs e)
-        {
-            expresionView.Items.Add("x");
-        }
-
-        private void exponentButton_Click(object sender, EventArgs e)
-        {
-            expresionView.Items.Add("^");
-        }
-
-        private void divButton_Click(object sender, EventArgs e)
-        {
-            expresionView.Items.Add("÷");
-        }
-
-        private void sqrtButton_Click(object sender, EventArgs e)
-        {
-            expresionView.Items.Add("√");
+                expressionTxt.Text = "0";
+            }
         }
 
         private void viewHistorial_Click(object sender, EventArgs e)
@@ -134,7 +124,7 @@ namespace proyecto_calculadora
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
                     connection.Open();
-                    using(SqlDataReader reader = command.ExecuteReader())
+                    using (SqlDataReader reader = command.ExecuteReader())
                     {
                         listViewHistorial.Items.Clear();
                         while (reader.Read())
@@ -156,6 +146,6 @@ namespace proyecto_calculadora
                 MessageBox.Show("Error al cargar el historial de operaciones ",
                     ex.Message);
             }
-        }
+        }        
     }
 }
