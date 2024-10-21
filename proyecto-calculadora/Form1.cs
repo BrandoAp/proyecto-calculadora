@@ -29,10 +29,18 @@ namespace proyecto_calculadora
             try
             {
                 connection.Open();
+                connection.Close();
             }
             catch (SqlException ex)
             {
                 MessageBox.Show("Error el intentar establecer la conexion ", ex.Message);
+            }
+            finally
+            {
+                if (connection.State == ConnectionState.Open)
+                {
+                    connection.Close();
+                }
             }
 
         }
@@ -80,7 +88,7 @@ namespace proyecto_calculadora
         private void equalsButton_Click(object sender, EventArgs e)
         {
             num2 = Convert.ToInt32(expressionTxt.Text);
-            if (Op == '+')
+            if(Op == '+')
             {
                 resultTxt.Text = (num1 + num2).ToString();
                 num1 = Convert.ToDouble(resultTxt.Text);
@@ -94,7 +102,7 @@ namespace proyecto_calculadora
 
                 expressionTxt.Text = "0";
             }
-            else if (Op == 'x')
+            else if (Op == '*')
             {
                 resultTxt.Text = (num1 * num2).ToString();
                 num1 = Convert.ToDouble(resultTxt.Text);
@@ -103,10 +111,17 @@ namespace proyecto_calculadora
             }
             else if (Op == '/')
             {
-                resultTxt.Text = (num1 / num2).ToString();
-                num1 = Convert.ToDouble(resultTxt.Text);
+                if (num2 != 0)
+                {
+                    resultTxt.Text = (num1 / num2).ToString();
+                    num1 = Convert.ToDouble(resultTxt.Text);
 
-                expressionTxt.Text = "0";
+                    expressionTxt.Text = "0";
+                } 
+                else
+                {
+                    MessageBox.Show("Error, no se puede dividir entre cero");
+                }
             }
         }
 
@@ -118,9 +133,9 @@ namespace proyecto_calculadora
         public void CargarHitorial()
         {
             string sql = "Select expresion, resultado from Historial_Calculos;";
+            SqlConnection connection = new SqlConnection(connectionString);
             try
             {
-                SqlConnection connection = new SqlConnection(connectionString);
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
                     connection.Open();
@@ -139,6 +154,13 @@ namespace proyecto_calculadora
             {
                 MessageBox.Show("Error al cargar el historial de operaciones ",
                     ex.Message);
+            }
+            finally
+            {
+                if (connection.State == ConnectionState.Open)
+                {
+                    connection.Close();
+                }
             }
         }        
     }
