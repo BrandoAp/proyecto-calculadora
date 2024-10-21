@@ -102,7 +102,7 @@ namespace proyecto_calculadora
 
                 expressionTxt.Text = "0";
             }
-            else if (Op == '*')
+            else if (Op == 'x')
             {
                 resultTxt.Text = (num1 * num2).ToString();
                 num1 = Convert.ToDouble(resultTxt.Text);
