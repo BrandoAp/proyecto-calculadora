@@ -344,6 +344,7 @@
             this.pointButton.Tag = ".";
             this.pointButton.Text = ".";
             this.pointButton.UseVisualStyleBackColor = false;
+            this.pointButton.Click += new System.EventHandler(this.addPoint);
             // 
             // Form1
             // 
