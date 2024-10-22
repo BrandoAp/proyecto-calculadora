@@ -63,11 +63,22 @@ namespace proyecto_calculadora
 
             expressionTxt.Text += " " + Op.ToString() + " ";
         }
-        private void clearButton_Click(object sender, EventArgs e)
+        private void clearAll(object sender, EventArgs e)
         {
             expressionTxt.Clear();
             resultTxt.Clear();
         }
+
+        private void clearLastAdd(object sender, EventArgs e)
+        {
+            // Verifica si el TextBox no está vacío
+            if (expressionTxt.Text.Length > 0)
+            {
+                // Elimina el último carácter del TextBox
+                expressionTxt.Text = expressionTxt.Text.Substring(0, expressionTxt.Text.Length - 1);
+            }
+        }
+
 
         private void equalsButton_Click(object sender, EventArgs e)
         {
