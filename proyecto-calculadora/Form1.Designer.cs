@@ -281,7 +281,7 @@
             this.viewHistorial.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.viewHistorial.Location = new System.Drawing.Point(453, 12);
             this.viewHistorial.Name = "viewHistorial";
-            this.viewHistorial.Size = new System.Drawing.Size(373, 49);
+            this.viewHistorial.Size = new System.Drawing.Size(124, 49);
             this.viewHistorial.TabIndex = 22;
             this.viewHistorial.Text = "Historial de Operaciones";
             this.viewHistorial.UseVisualStyleBackColor = false;
@@ -316,14 +316,14 @@
             this.listViewHistorial.FormattingEnabled = true;
             this.listViewHistorial.Location = new System.Drawing.Point(454, 69);
             this.listViewHistorial.Name = "listViewHistorial";
-            this.listViewHistorial.Size = new System.Drawing.Size(372, 264);
+            this.listViewHistorial.Size = new System.Drawing.Size(123, 264);
             this.listViewHistorial.TabIndex = 26;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(838, 346);
+            this.ClientSize = new System.Drawing.Size(587, 346);
             this.Controls.Add(this.listViewHistorial);
             this.Controls.Add(this.resultTxt);
             this.Controls.Add(this.expressionTxt);

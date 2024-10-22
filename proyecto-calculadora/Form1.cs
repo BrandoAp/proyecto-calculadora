@@ -1,4 +1,5 @@
-﻿using System;
+﻿using proyecto_calculadora.Modelo;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -29,7 +30,6 @@ namespace proyecto_calculadora
             try
             {
                 connection.Open();
-                connection.Close();
             }
             catch (SqlException ex)
             {
@@ -45,38 +45,67 @@ namespace proyecto_calculadora
 
         }
 
-        private void addNum (object sender, EventArgs e)
+        private void addNum(object sender, EventArgs e)
         {
             var btn = ((Button)sender);
+            string num = btn.Text;
 
-            if
-                (expressionTxt.Text == "0")
-                expressionTxt.Text = "";
-
-            expressionTxt.Text += btn.Text;
+            if (expressionTxt.Text == "0")
+                expressionTxt.Text = num;
+            else
+                expressionTxt.Text += num;
         }
 
         private void clickOp(object sender, EventArgs e)
         {
             var btn = ((Button)sender);
-            num1 = Convert.ToDouble(expressionTxt.Text);
             Op = Convert.ToChar(btn.Tag);
 
-            if (Op == '²')
+            if(Op == '²')
             {
-                num1 = Math.Pow(num1, 2);
-                resultTxt.Text = num1.ToString();
-                expressionTxt.Text = "0";
+                //Intentamos convertir el valor del expresionTxt a numero
+                if (double.TryParse(expressionTxt.Text, out num1))
+                {
+                    num1 = Convert.ToDouble(expressionTxt.Text);
+                    num1 = Math.Pow(num1, 2);
+                    resultTxt.Text = num1.ToString();
+
+                    expressionTxt.Text = $"({expressionTxt.Text})²";
+
+                    Modelo_Calculadora modelo = new Modelo_Calculadora(expressionTxt.Text, num1);
+                    saveHistory(modelo);
+                }
+                
             }
             else if (Op == '√')
             {
-                num1 = Math.Sqrt(num1);
-                resultTxt.Text = num1.ToString();
-                expressionTxt.Text = "0";
+                //Intentamos convertir el valor del expresionTxt a numero
+                if (double.TryParse(expressionTxt.Text, out num1))
+                {
+                    if (num1 > 0)
+                    {
+                        num1 = Math.Sqrt(num1);
+                        resultTxt.Text = num1.ToString();
+
+                        expressionTxt.Text = $"√({expressionTxt.Text})";
+
+                        Modelo_Calculadora modelo = new Modelo_Calculadora(expressionTxt.Text, num1);
+                        saveHistory(modelo);
+                    }
+                    else
+                        MessageBox.Show("Error! No existen raices de números negativos");
+                }
+                
             }
             else
             {
-                expressionTxt.Text = "0";
+                //Concatenamos el operador al texto actual sin reinciar el campo
+                if (!string.IsNullOrWhiteSpace(expressionTxt.Text))
+                {
+                    num1 = Convert.ToDouble(expressionTxt.Text);
+
+                    expressionTxt.Text += " " + Op.ToString() + " "; 
+                }
             }
         }
         private void clearButton_Click(object sender, EventArgs e)
@@ -87,41 +116,53 @@ namespace proyecto_calculadora
 
         private void equalsButton_Click(object sender, EventArgs e)
         {
-            num2 = Convert.ToInt32(expressionTxt.Text);
-            if(Op == '+')
+            try
             {
-                resultTxt.Text = (num1 + num2).ToString();
-                num1 = Convert.ToDouble(resultTxt.Text);
+                string[] expressionParts = expressionTxt.Text.Split(' ');
 
-                expressionTxt.Text = "0";
-            }
-            else if (Op == '-')
-            {
-                resultTxt.Text = (num1 - num2).ToString();
-                num1 = Convert.ToDouble(resultTxt.Text);
-
-                expressionTxt.Text = "0";
-            }
-            else if (Op == 'x')
-            {
-                resultTxt.Text = (num1 * num2).ToString();
-                num1 = Convert.ToDouble(resultTxt.Text);
-
-                expressionTxt.Text = "0";
-            }
-            else if (Op == '/')
-            {
-                if (num2 != 0)
+                if (expressionParts.Length == 3)
                 {
-                    resultTxt.Text = (num1 / num2).ToString();
-                    num1 = Convert.ToDouble(resultTxt.Text);
+                    num1 = Convert.ToDouble(expressionParts[0]);
+                    Op = Convert.ToChar(expressionParts[1]);
+                    num2 = Convert.ToDouble(expressionParts[2]);
 
-                    expressionTxt.Text = "0";
-                } 
-                else
-                {
-                    MessageBox.Show("Error, no se puede dividir entre cero");
+                    double resultado = 0;
+
+                    switch (Op)
+                    {
+                        case '+':
+                            resultado = num1 + num2;
+                            break;
+                        case '-':
+                            resultado = num1 - num2;
+                            break;
+                        case 'x':
+                            resultado = num1 * num2;
+                            break;
+                        case '/':
+                            if (num2 != 0)
+                            {
+                                resultado = num1 / num2;
+                            }
+                            else
+                            {
+                                MessageBox.Show("No se puede dividir entre 0.");
+                                return;
+                            }
+                            break;
+                    }
+                    resultTxt.Text = resultado.ToString();
+
+                    string expresionCompleta = num1 + " " +  Op.ToString() + " " + num2;
+
+                    Modelo_Calculadora modelo = new Modelo_Calculadora(expresionCompleta, resultado);
+                    saveHistory(modelo);
+
+                    expressionTxt.Text = expresionCompleta;
                 }
+            } catch (Exception ex)
+            {
+                MessageBox.Show("Error en la operacion " + ex.Message);
             }
         }
 
@@ -158,10 +199,36 @@ namespace proyecto_calculadora
             finally
             {
                 if (connection.State == ConnectionState.Open)
-                {
                     connection.Close();
+            }
+        }
+
+        private void saveHistory(Modelo_Calculadora modelo)
+        {
+            string sql = "INSERT INTO Historial_Calculos (expresion, resultado) VALUES (@expresion, @resultado);";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        command.Parameters.AddWithValue("@expresion", modelo.expresion);
+                        command.Parameters.AddWithValue("@resultado", modelo.resultado);
+
+                        command.ExecuteNonQuery();
+                    }
+                }
+                catch (SqlException ex)
+                {
+                    MessageBox.Show("Error al guardar la operacion en el historial: ", ex.Message);
+                }
+                finally
+                {
+                    if (connection.State == ConnectionState.Open)
+                        connection.Close();
                 }
             }
-        }        
+        }
     }
 }

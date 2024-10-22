@@ -11,8 +11,8 @@ namespace proyecto_calculadora.Modelo
     public class Modelo_Calculadora
     {
         private int id_expresion { get; set;}
-        private string expresion { get; set;}
-        private double resultado { get; set;}
+        public string expresion { get; set;}
+        public double resultado { get; set;}
         private DateTime fecha_hora { get; set;}
 
         public Modelo_Calculadora (string expresion, double resultado)
