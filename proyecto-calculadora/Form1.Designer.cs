@@ -51,13 +51,15 @@
             this.expressionTxt = new System.Windows.Forms.TextBox();
             this.resultTxt = new System.Windows.Forms.TextBox();
             this.listViewHistorial = new System.Windows.Forms.ListBox();
+            this.clearEntryButton = new System.Windows.Forms.Button();
+            this.pointButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // oneButton
             // 
             this.oneButton.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.oneButton.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.oneButton.Location = new System.Drawing.Point(12, 69);
+            this.oneButton.Location = new System.Drawing.Point(63, 69);
             this.oneButton.Name = "oneButton";
             this.oneButton.Size = new System.Drawing.Size(105, 51);
             this.oneButton.TabIndex = 1;
@@ -69,7 +71,7 @@
             // 
             this.twoButton.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.twoButton.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.twoButton.Location = new System.Drawing.Point(123, 69);
+            this.twoButton.Location = new System.Drawing.Point(174, 69);
             this.twoButton.Name = "twoButton";
             this.twoButton.Size = new System.Drawing.Size(104, 51);
             this.twoButton.TabIndex = 2;
@@ -81,7 +83,7 @@
             // 
             this.treeButton.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.treeButton.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.treeButton.Location = new System.Drawing.Point(233, 69);
+            this.treeButton.Location = new System.Drawing.Point(284, 69);
             this.treeButton.Name = "treeButton";
             this.treeButton.Size = new System.Drawing.Size(104, 51);
             this.treeButton.TabIndex = 3;
@@ -93,7 +95,7 @@
             // 
             this.fourButton.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.fourButton.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fourButton.Location = new System.Drawing.Point(12, 126);
+            this.fourButton.Location = new System.Drawing.Point(63, 126);
             this.fourButton.Name = "fourButton";
             this.fourButton.Size = new System.Drawing.Size(106, 51);
             this.fourButton.TabIndex = 4;
@@ -105,7 +107,7 @@
             // 
             this.fiveButton.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.fiveButton.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fiveButton.Location = new System.Drawing.Point(123, 126);
+            this.fiveButton.Location = new System.Drawing.Point(174, 126);
             this.fiveButton.Name = "fiveButton";
             this.fiveButton.Size = new System.Drawing.Size(104, 51);
             this.fiveButton.TabIndex = 5;
@@ -117,7 +119,7 @@
             // 
             this.sixButton.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.sixButton.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sixButton.Location = new System.Drawing.Point(233, 126);
+            this.sixButton.Location = new System.Drawing.Point(284, 126);
             this.sixButton.Name = "sixButton";
             this.sixButton.Size = new System.Drawing.Size(104, 51);
             this.sixButton.TabIndex = 6;
@@ -129,7 +131,7 @@
             // 
             this.sevenButton.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.sevenButton.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sevenButton.Location = new System.Drawing.Point(12, 183);
+            this.sevenButton.Location = new System.Drawing.Point(63, 183);
             this.sevenButton.Name = "sevenButton";
             this.sevenButton.Size = new System.Drawing.Size(106, 51);
             this.sevenButton.TabIndex = 7;
@@ -141,7 +143,7 @@
             // 
             this.eightButton.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.eightButton.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.eightButton.Location = new System.Drawing.Point(123, 183);
+            this.eightButton.Location = new System.Drawing.Point(174, 183);
             this.eightButton.Name = "eightButton";
             this.eightButton.Size = new System.Drawing.Size(104, 51);
             this.eightButton.TabIndex = 8;
@@ -153,7 +155,7 @@
             // 
             this.nineButton.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.nineButton.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nineButton.Location = new System.Drawing.Point(233, 183);
+            this.nineButton.Location = new System.Drawing.Point(284, 183);
             this.nineButton.Name = "nineButton";
             this.nineButton.Size = new System.Drawing.Size(104, 51);
             this.nineButton.TabIndex = 9;
@@ -165,7 +167,7 @@
             // 
             this.ceroButton.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.ceroButton.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ceroButton.Location = new System.Drawing.Point(123, 240);
+            this.ceroButton.Location = new System.Drawing.Point(174, 240);
             this.ceroButton.Name = "ceroButton";
             this.ceroButton.Size = new System.Drawing.Size(104, 51);
             this.ceroButton.TabIndex = 10;
@@ -177,7 +179,7 @@
             // 
             this.sumButton.BackColor = System.Drawing.SystemColors.HighlightText;
             this.sumButton.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sumButton.Location = new System.Drawing.Point(343, 69);
+            this.sumButton.Location = new System.Drawing.Point(394, 69);
             this.sumButton.Name = "sumButton";
             this.sumButton.Size = new System.Drawing.Size(104, 51);
             this.sumButton.TabIndex = 11;
@@ -190,7 +192,7 @@
             // 
             this.minButton.BackColor = System.Drawing.SystemColors.HighlightText;
             this.minButton.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.minButton.Location = new System.Drawing.Point(343, 126);
+            this.minButton.Location = new System.Drawing.Point(394, 126);
             this.minButton.Name = "minButton";
             this.minButton.Size = new System.Drawing.Size(104, 51);
             this.minButton.TabIndex = 12;
@@ -203,7 +205,7 @@
             // 
             this.plusButton.BackColor = System.Drawing.SystemColors.HighlightText;
             this.plusButton.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.plusButton.Location = new System.Drawing.Point(343, 183);
+            this.plusButton.Location = new System.Drawing.Point(394, 183);
             this.plusButton.Name = "plusButton";
             this.plusButton.Size = new System.Drawing.Size(104, 51);
             this.plusButton.TabIndex = 13;
@@ -216,7 +218,7 @@
             // 
             this.divButton.BackColor = System.Drawing.SystemColors.HighlightText;
             this.divButton.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.divButton.Location = new System.Drawing.Point(343, 240);
+            this.divButton.Location = new System.Drawing.Point(394, 240);
             this.divButton.Name = "divButton";
             this.divButton.Size = new System.Drawing.Size(104, 51);
             this.divButton.TabIndex = 14;
@@ -229,23 +231,23 @@
             // 
             this.clearButton.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.clearButton.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.clearButton.Location = new System.Drawing.Point(12, 240);
+            this.clearButton.Location = new System.Drawing.Point(9, 12);
             this.clearButton.Name = "clearButton";
-            this.clearButton.Size = new System.Drawing.Size(106, 51);
+            this.clearButton.Size = new System.Drawing.Size(48, 165);
             this.clearButton.TabIndex = 15;
-            this.clearButton.Text = "C";
+            this.clearButton.Text = "CE";
             this.clearButton.UseVisualStyleBackColor = false;
-            this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
+            this.clearButton.Click += new System.EventHandler(this.clearLastAdd);
             // 
             // exponentButton
             // 
             this.exponentButton.BackColor = System.Drawing.SystemColors.HighlightText;
             this.exponentButton.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.exponentButton.Location = new System.Drawing.Point(233, 240);
+            this.exponentButton.Location = new System.Drawing.Point(284, 240);
             this.exponentButton.Name = "exponentButton";
             this.exponentButton.Size = new System.Drawing.Size(104, 51);
             this.exponentButton.TabIndex = 16;
-            this.exponentButton.Tag = "²";
+            this.exponentButton.Tag = "^";
             this.exponentButton.Text = "x²";
             this.exponentButton.UseVisualStyleBackColor = false;
             this.exponentButton.Click += new System.EventHandler(this.clickOp);
@@ -254,9 +256,9 @@
             // 
             this.equalsButton.BackColor = System.Drawing.SystemColors.HighlightText;
             this.equalsButton.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.equalsButton.Location = new System.Drawing.Point(12, 297);
+            this.equalsButton.Location = new System.Drawing.Point(63, 297);
             this.equalsButton.Name = "equalsButton";
-            this.equalsButton.Size = new System.Drawing.Size(325, 39);
+            this.equalsButton.Size = new System.Drawing.Size(325, 49);
             this.equalsButton.TabIndex = 17;
             this.equalsButton.Text = "=";
             this.equalsButton.UseVisualStyleBackColor = false;
@@ -267,9 +269,9 @@
             this.sqrtButton.BackColor = System.Drawing.SystemColors.HighlightText;
             this.sqrtButton.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sqrtButton.ForeColor = System.Drawing.Color.Black;
-            this.sqrtButton.Location = new System.Drawing.Point(343, 297);
+            this.sqrtButton.Location = new System.Drawing.Point(394, 297);
             this.sqrtButton.Name = "sqrtButton";
-            this.sqrtButton.Size = new System.Drawing.Size(104, 38);
+            this.sqrtButton.Size = new System.Drawing.Size(104, 49);
             this.sqrtButton.TabIndex = 19;
             this.sqrtButton.Tag = "√";
             this.sqrtButton.Text = "√ ";
@@ -279,7 +281,7 @@
             // viewHistorial
             // 
             this.viewHistorial.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.viewHistorial.Location = new System.Drawing.Point(453, 12);
+            this.viewHistorial.Location = new System.Drawing.Point(504, 12);
             this.viewHistorial.Name = "viewHistorial";
             this.viewHistorial.Size = new System.Drawing.Size(124, 49);
             this.viewHistorial.TabIndex = 22;
@@ -290,7 +292,7 @@
             // expressionTxt
             // 
             this.expressionTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.expressionTxt.Location = new System.Drawing.Point(12, 12);
+            this.expressionTxt.Location = new System.Drawing.Point(63, 12);
             this.expressionTxt.MaxLength = 19;
             this.expressionTxt.Multiline = true;
             this.expressionTxt.Name = "expressionTxt";
@@ -303,7 +305,8 @@
             // resultTxt
             // 
             this.resultTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.resultTxt.Location = new System.Drawing.Point(343, 12);
+            this.resultTxt.Location = new System.Drawing.Point(394, 12);
+            this.resultTxt.MaxLength = 6;
             this.resultTxt.Multiline = true;
             this.resultTxt.Name = "resultTxt";
             this.resultTxt.ReadOnly = true;
@@ -314,16 +317,43 @@
             // listViewHistorial
             // 
             this.listViewHistorial.FormattingEnabled = true;
-            this.listViewHistorial.Location = new System.Drawing.Point(454, 69);
+            this.listViewHistorial.Location = new System.Drawing.Point(505, 69);
             this.listViewHistorial.Name = "listViewHistorial";
-            this.listViewHistorial.Size = new System.Drawing.Size(123, 264);
+            this.listViewHistorial.Size = new System.Drawing.Size(123, 277);
             this.listViewHistorial.TabIndex = 26;
+            // 
+            // clearEntryButton
+            // 
+            this.clearEntryButton.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.clearEntryButton.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.clearEntryButton.Location = new System.Drawing.Point(9, 183);
+            this.clearEntryButton.Name = "clearEntryButton";
+            this.clearEntryButton.Size = new System.Drawing.Size(48, 163);
+            this.clearEntryButton.TabIndex = 27;
+            this.clearEntryButton.Text = "C";
+            this.clearEntryButton.UseVisualStyleBackColor = false;
+            this.clearEntryButton.Click += new System.EventHandler(this.clearAll);
+            // 
+            // pointButton
+            // 
+            this.pointButton.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.pointButton.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pointButton.Location = new System.Drawing.Point(63, 240);
+            this.pointButton.Name = "pointButton";
+            this.pointButton.Size = new System.Drawing.Size(106, 51);
+            this.pointButton.TabIndex = 28;
+            this.pointButton.Tag = ".";
+            this.pointButton.Text = ".";
+            this.pointButton.UseVisualStyleBackColor = false;
+            this.pointButton.Click += new System.EventHandler(this.addPoint);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(587, 346);
+            this.ClientSize = new System.Drawing.Size(636, 355);
+            this.Controls.Add(this.pointButton);
+            this.Controls.Add(this.clearEntryButton);
             this.Controls.Add(this.listViewHistorial);
             this.Controls.Add(this.resultTxt);
             this.Controls.Add(this.expressionTxt);
@@ -347,6 +377,7 @@
             this.Controls.Add(this.twoButton);
             this.Controls.Add(this.oneButton);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "Calculadora";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -378,6 +409,8 @@
         private System.Windows.Forms.TextBox expressionTxt;
         private System.Windows.Forms.TextBox resultTxt;
         private System.Windows.Forms.ListBox listViewHistorial;
+        private System.Windows.Forms.Button clearEntryButton;
+        private System.Windows.Forms.Button pointButton;
     }
 }
 
