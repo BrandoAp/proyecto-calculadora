@@ -14,7 +14,7 @@ namespace proyecto_calculadora
 {
     public partial class Form1 : Form
     {
-        double num1 = 0, num2 = 0;
+         double num1 = 0, num2 = 0;
         char Op;
         string connectionString = @"Server=.\sqlexpress;Database=calculadora;Trusted_Connection=true;";
 
@@ -47,22 +47,25 @@ namespace proyecto_calculadora
 
         private void addNum(object sender, EventArgs e)
         {
-            var btn = ((Button)sender);
-
+            var btn = ((Button)sender); // Obtiene ell boton que fue presionado
+            
+            // Si el campo de texto tiene un "0" lo reemplaza
             if (expressionTxt.Text == "0")
                 expressionTxt.Text = "";
 
-            expressionTxt.Text += btn.Text;
+            expressionTxt.Text += btn.Text; // agrega el numero presionado a la expresion
         }
 
         private void clickOp(object sender, EventArgs e)
         {
-            var btn = ((Button)sender);
-            Op = Convert.ToChar(btn.Tag);
+            var btn = ((Button)sender); // Obtiene el boton presionado
+            Op = Convert.ToChar(btn.Tag); //convierte el tag del boton a caracter (operador)
 
+            //Si el campo de texto tiene un "0" lo reemplaza
             if (expressionTxt.Text == "0")
                 expressionTxt.Text = "";
 
+            //Agrega el operador a la expresion con espacios entre el numero y el operador
             expressionTxt.Text += " " + Op.ToString() + " ";
         }
         private void clearAll(object sender, EventArgs e)
@@ -99,14 +102,17 @@ namespace proyecto_calculadora
         {
             try
             {
+                //Reemplaza 'x' por '*' para lograr multiplicar
                 string expression = expressionTxt.Text.Replace("x", "*");
 
+                // Evalua la expresion y obtiene el resultado
                 double resultado = EvaluateExpression(expression);
 
-                resultTxt.Text = resultado.ToString();
+                resultTxt.Text = resultado.ToString(); //Muestra el resultado en el campo de texto resultTxt
 
+                // Crea una instancia del modelo para guardar la operacion en el historial
                 Modelo_Calculadora modelo = new Modelo_Calculadora(expression, resultado);
-                saveHistory(modelo);
+                saveHistory(modelo); // Guarda la expresion y el resultado en la base de datos
             } 
             catch (Exception ex)
             {
@@ -118,36 +124,51 @@ namespace proyecto_calculadora
         {
             try
             {
+                // Maneja la operacion de raiz si esta en la expresion
                 if (expression.Contains("√"))
                 {
+                    //Divide la expresion por simbolo y elimina las entradas vacias
                     string[] partes = expression.Split(new[] { '√' }, StringSplitOptions.RemoveEmptyEntries);
                     if (partes.Length == 1)
                     {
-                        double numb = Convert.ToDouble(partes[0].Trim());
-                        return Math.Sqrt(numb);
+                        double numb = Convert.ToDouble(partes[0].Trim()); //Convierte la cadena a double y elimina los espacio en ambos lados
+                        return Math.Sqrt(numb); // Calcula la raiz cuadrada
                     }
                     else
                     {
+                        //Si hay algo antes del simbolo, guarda la parte antes de la raiz
                         string beforeSqrt = partes[0].Trim();
-                        double numbSqrt = Convert.ToDouble(partes[1].Trim());
+                        double numbSqrt = Convert.ToDouble(partes[1].Trim()); // convierte la partes despues del simbolo a un numero
 
+                        //Si hay algo antes de la raiz evalua esa parte
+                        //Si no hay nada antes el resultado sera 0
                         double resultS = (beforeSqrt.Length > 0) ? EvaluateExpression(beforeSqrt) : 0;
-                        return Math.Sqrt(numbSqrt);
+                        return Math.Sqrt(numbSqrt); // Calcula la raiz y la retorna
                     }
                 }
 
                 if (expression.Contains("^"))
                 {
+                    //Divide la expresion en dos partes usando el simbolo como operador
                     string[] partes = expression.Split('^');
-                    double baseNum = Convert.ToDouble(partes[0].Trim());
-                    double exponent = Convert.ToDouble(partes[1].Trim());
 
-                    return Math.Pow(baseNum, exponent);
+                    //Convierte la primera parte de la expresion a un numero
+                    double baseNum = Convert.ToDouble(partes[0].Trim());
+
+                    //Convierte la segunda parte de la expresion a un numero
+                    double exponent = Convert.ToDouble(partes[1].Trim());
+                   
+                    return Math.Pow(baseNum, exponent); //Retorna el resultado de la potencia
                 }
 
+                //Crea la instancia de la clase DataTable, que se utiliza para realizar cálculos de expresiones
                 var table = new System.Data.DataTable();
+
+                /*Usa el metodo Compute para evualuar expresions que se pasa como una cadena
+                 expression contiene la cadena que es se usa como expresion*/
                 var value = table.Compute(expression, null);
-                return Convert.ToDouble(value);
+
+                return Convert.ToDouble(value); //Convierte el resultado de la evaluacion a tipo double y se retorna
             }
             catch (Exception ex)
             {
