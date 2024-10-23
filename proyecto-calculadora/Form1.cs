@@ -49,7 +49,6 @@ namespace proyecto_calculadora
         {
             var btn = ((Button)sender);
 
-            //Si el numero inicial es 0, se elimina para concatenar numeros
             if (expressionTxt.Text == "0")
                 expressionTxt.Text = "";
 
@@ -60,6 +59,9 @@ namespace proyecto_calculadora
         {
             var btn = ((Button)sender);
             Op = Convert.ToChar(btn.Tag);
+
+            if (expressionTxt.Text == "0")
+                expressionTxt.Text = "";
 
             expressionTxt.Text += " " + Op.ToString() + " ";
         }
@@ -76,6 +78,19 @@ namespace proyecto_calculadora
             {
                 // Elimina el último carácter del TextBox
                 expressionTxt.Text = expressionTxt.Text.Substring(0, expressionTxt.Text.Length - 1);
+            }
+        }
+
+        private void addPoint(object sender, EventArgs e)
+        {
+            // Obtener el último número de la expresión, separando por operadores
+            string[] partes = expressionTxt.Text.Split(' ');
+
+            // Si la última parte no contiene un punto decimal, se puede agregar
+            if (!partes[partes.Length - 1].Contains("."))
+            {
+                // Añadir punto decimal al número actual
+                expressionTxt.Text += ".";
             }
         }
 
@@ -103,13 +118,40 @@ namespace proyecto_calculadora
         {
             try
             {
+                if (expression.Contains("√"))
+                {
+                    string[] partes = expression.Split(new[] { '√' }, StringSplitOptions.RemoveEmptyEntries);
+                    if (partes.Length == 1)
+                    {
+                        double numb = Convert.ToDouble(partes[0].Trim());
+                        return Math.Sqrt(numb);
+                    }
+                    else
+                    {
+                        string beforeSqrt = partes[0].Trim();
+                        double numbSqrt = Convert.ToDouble(partes[1].Trim());
+
+                        double resultS = (beforeSqrt.Length > 0) ? EvaluateExpression(beforeSqrt) : 0;
+                        return Math.Sqrt(numbSqrt);
+                    }
+                }
+
+                if (expression.Contains("^"))
+                {
+                    string[] partes = expression.Split('^');
+                    double baseNum = Convert.ToDouble(partes[0].Trim());
+                    double exponent = Convert.ToDouble(partes[1].Trim());
+
+                    return Math.Pow(baseNum, exponent);
+                }
+
                 var table = new System.Data.DataTable();
                 var value = table.Compute(expression, null);
                 return Convert.ToDouble(value);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al evaluar la expresion "+ ex.Message);
+                MessageBox.Show("Error al evaluar la expresion " + ex.Message);
                 return 0;
             }
         }

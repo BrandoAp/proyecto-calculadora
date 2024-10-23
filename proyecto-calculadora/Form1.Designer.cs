@@ -247,7 +247,7 @@
             this.exponentButton.Name = "exponentButton";
             this.exponentButton.Size = new System.Drawing.Size(104, 51);
             this.exponentButton.TabIndex = 16;
-            this.exponentButton.Tag = "²";
+            this.exponentButton.Tag = "^";
             this.exponentButton.Text = "x²";
             this.exponentButton.UseVisualStyleBackColor = false;
             this.exponentButton.Click += new System.EventHandler(this.clickOp);
@@ -306,6 +306,7 @@
             // 
             this.resultTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.resultTxt.Location = new System.Drawing.Point(394, 12);
+            this.resultTxt.MaxLength = 6;
             this.resultTxt.Multiline = true;
             this.resultTxt.Name = "resultTxt";
             this.resultTxt.ReadOnly = true;
